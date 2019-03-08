@@ -18,6 +18,14 @@ async function signup(parent, args, context, info) {
   }
 }
 
+async function post(parent, args, context, info) {
+  const userId = getUserId(context)
+  return context.prisma.createLink({
+    url: args.url,
+    description: args.description,
+    postedBy: { connect: { id: userId } },
+  })
+}
 async function login(parent, args, context, info) {
   // 1
   const user = await context.prisma.user({ email: args.email })
@@ -25,14 +33,6 @@ async function login(parent, args, context, info) {
     throw new Error('No such user found')
   }
 
-  async function post(parent, args, context, info) {
-    const userId = getUserId(context)
-    return context.prisma.createLink({
-      url: args.url,
-      description: args.description,
-      postedBy: { connect: { id: userId } },
-    })
-  }
 
   // 2
   const valid = await bcrypt.compare(args.password, user.password)
