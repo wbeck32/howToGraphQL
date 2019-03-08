@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/wbeck32/howToGraphQL/issues"
   },
-  "homepage": "https://github.com/wbeck32/howToGraphQL#readme"
+  "homepage": "https://github.com/wbeck32/howToGraphQL#readme",
+  "dependencies": {
+    "graphql-yoga": "^1.17.4"
+  }
 }
